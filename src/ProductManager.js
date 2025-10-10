@@ -32,20 +32,70 @@ class ProductManager {
     }
   }
 
+  async validateProduct(product, isUpdate = false) {
+    const requiredFields = {
+      title: "string",
+      description: "string",
+      code: "string",
+      price: "number",
+      status: "boolean",
+      stock: "number",
+      category: "string",
+      thumbnails: "object",
+    };
+
+    for (const field in product) {
+      if (!(field in requiredFields)) {
+        throw new Error(`Atributo no permitido: "${field}"`);
+      }
+    }
+
+    if (!isUpdate) {
+      for (const field in requiredFields) {
+        if (!(field in product)) {
+          throw new Error(`El campo "${field}" es requerido`);
+        }
+      }
+    }
+
+    for (const [field, type] of Object.entries(requiredFields)) {
+      if (field in product) {
+        if (type === "object") {
+          if (!Array.isArray(product[field])) {
+            throw new Error(`El campo "${field}" debe ser un array`);
+          }
+          if (
+            field === "thumbnails" &&
+            !product[field].every((item) => typeof item === "string")
+          ) {
+            throw new Error(
+              "Todos los elementos de thumbnails deben ser strings",
+            );
+          }
+        } else if (typeof product[field] !== type) {
+          throw new Error(`El campo "${field}" debe ser de tipo ${type}`);
+        }
+      }
+    }
+  }
+
   async addProduct(newProduct) {
     try {
+      await this.validateProduct(newProduct, false);
       const products = await this.getProducts();
       const newId = this.generateNewId();
       const product = { id: newId, ...newProduct };
       products.push(product);
       await this.updateJson(products);
-      return products;
+      return product;
     } catch (error) {
       throw new Error("Error al añadir el nuevo producto: " + error.message);
     }
   }
+
   async updateProductById(productId, updates) {
     try {
+      await this.validateProduct(updates, true);
       const products = await this.getProducts();
       const indexProduct = products.findIndex(
         (product) => product.id === productId,
@@ -58,40 +108,32 @@ class ProductManager {
       throw new Error("Error al actualizar el producto: " + error.message);
     }
   }
+
   async deleteProductById(productId) {
     try {
       const products = await this.getProducts();
-      const indexProduct = products.findIndex(
-        (product) => product.id === productId,
-      );
-      if (indexProduct === -1) throw new Error("Producto no encontrado");
       const filteredProducts = products.filter(
         (product) => product.id !== productId,
       );
+      if (filteredProducts.length === products.length)
+        throw new Error("Producto no encontrado");
       await this.updateJson(filteredProducts);
       return filteredProducts;
     } catch (error) {
       throw new Error("Error al borrar el producto: " + error.message);
     }
   }
-}
-
-async function main() {
-  try {
-    const productManager = new ProductManager("./src/products.json");
-    // await productManager.addProduct({
-    //   title: "Hola como estas vos",
-    //   price: 1500,
-    //   stock: 10,
-    // });
-    //const products = await productManager.getProducts();
-    //await productManager.updateProductById("e0c44caf-8802-45ad-bbe4-544d82f1d349", {price : 1800})
-    await productManager.deleteProductById(
-      "e0c44caf-8802-45ad-bbe4-544d82f1d349",
-    );
-  } catch (error) {
-    console.log(error);
+  async getProductById(productId) {
+    try {
+      const products = await this.getProducts();
+      const product = products.find((product) => product.id === productId);
+      if (!product) throw new Error("Producto no encontrado");
+      await this.updateJson([product]);
+      return product;
+    } catch (error) {
+      throw new Error("Error al retornar el producto: " + error.message);
+    }
   }
 }
 
-main();
+export default ProductManager;
