@@ -8,11 +8,7 @@
     "status": true,
     "stock": 1,
     "category": "string",
-    "thumbnails": [
-      "string",
-      "string",
-      "string"
-    ]
+    "thumbnails": ["string", "string", "string"]
   },
   {
     "id": "0c6ff981-24da-4836-a3b7-054133ad6f8b",
@@ -23,16 +19,8 @@
     "status": true,
     "stock": 1,
     "category": "string",
-    "thumbnails": [
-      "string",
-      "string",
-      "string"
-    ],
-    "casa": [
-      "string",
-      "string",
-      "string"
-    ]
+    "thumbnails": ["string", "string", "string"],
+    "casa": ["string", "string", "string"]
   },
   {
     "id": "f87af440-0bbd-474a-85cd-4d9a8de9c586",
@@ -43,10 +31,6 @@
     "status": true,
     "stock": 1,
     "category": "string",
-    "thumbnails": [
-      "string",
-      "string",
-      "string"
-    ]
+    "thumbnails": ["string", "string", "string"]
   }
 ]
