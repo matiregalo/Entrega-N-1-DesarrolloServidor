@@ -10,20 +10,6 @@ class CartManager {
     return crypto.randomUUID();
   }
 
-  async addProduct(newProduct) {
-    try {
-      await this.validateProduct(newProduct, false);
-      const products = await this.getProducts();
-      const newId = this.generateNewId();
-      const product = { id: newId, ...newProduct };
-      products.push(product);
-      await this.updateJson(products);
-      return product;
-    } catch (error) {
-      throw new Error("Error al añadir el nuevo producto: " + error.message);
-    }
-  }
-
   async validateCart(cart) {
     const requiredFields = {
       products: "object",
@@ -52,20 +38,40 @@ class CartManager {
     }
   }
 
-async getCarts() {
+  async getCarts() {
     try {
       const fileData = await fs.readFile(this.pathFile, "utf-8");
       const carts = JSON.parse(fileData);
-      return products;
+      return carts;
     } catch (error) {
-      throw new Error("Error al traer los productos: " + error.message);
+      throw new Error("Error al traer los carritos: " + error.message);
     }
   }
-
-  async createCart(cart) {
-    await this.validateProduct(cart);
-    const carts = await this.getCarts();
+  async updateJson(carts) {
+    try {
+      await fs.writeFile(
+        this.pathFile,
+        JSON.stringify(carts, null, 2),
+        "utf-8",
+      );
+    } catch (error) {
+      throw new Error("Error al modificar el archivo: " + error.message);
+    }
   }
+  async createCart(newCart) {
+    try {
+      await this.validateProduct(newCart);
+      const carts = await this.getCarts();
+      const newId = this.generateNewId();
+      const cart = { id: newId, ...newCart };
+      carts.push(cart);
+      await this.updateJson(carts);
+      return cart;
+    } catch (error) {
+      throw new Error("Error al añadir el nuevo carrito: " + error.message);
+    }
+  }
+  async getProductsByCartId(cartId) {}
 }
 
 export default CartManager;

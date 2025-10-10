@@ -1,9 +1,11 @@
 import express from "express";
 import ProductManager from "./ProductManager.js";
+import CartManager from "./CartManager.js";
 
 const app = express();
 app.use(express.json());
 const productManager = new ProductManager("./src/products.json");
+const cartManager = new CartManager("./src/carts.json");
 
 app.get("/products", async (req, res) => {
   try {
@@ -39,6 +41,15 @@ app.post("/products", async (req, res) => {
     const newProduct = req.body;
     const product = await productManager.addProduct(newProduct);
     res.status(201).json({ message: "Producto Agregado", product });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+app.post("/carts", async (req, res) => {
+  try {
+    const newCart = req.body;
+    const cart = await cartManager.createCart(newCart);
+    res.status(201).json({ message: "Carrito Creado", cart });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
