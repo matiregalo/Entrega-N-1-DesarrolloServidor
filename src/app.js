@@ -26,16 +26,6 @@ app.get("/products/:productId", async (req, res) => {
   }
 });
 
-app.get("/carts/:cartId", async (req, res) => {
-  try {
-    const cartId = req.params.cartId;
-    const products = await cartManager.getProductsByCartId(cartId);
-    res.status(200).json({ message: "Productos en el carrito: ", products });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
 app.delete("/products/:productId", async (req, res) => {
   try {
     const productId = req.params.productId;
@@ -55,6 +45,18 @@ app.post("/products", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+app.put("/products/:productId", async (req, res) => {
+  try {
+    const productId = req.params.productId;
+    const updates = req.body;
+    const products = await productManager.updateProductById(productId, updates);
+    res.status(200).json({ message: "Producto Actualizado", products });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 app.post("/carts", async (req, res) => {
   try {
     const cart = await cartManager.createCart();
@@ -63,6 +65,17 @@ app.post("/carts", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+app.get("/carts/:cartId", async (req, res) => {
+  try {
+    const cartId = req.params.cartId;
+    const products = await cartManager.getProductsByCartId(cartId);
+    res.status(200).json({ message: "Productos en el carrito: ", products });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 app.post("/carts/:cartId/products/:productId", async (req, res) => {
   try {
     const cartId = req.params.cartId;
@@ -74,17 +87,6 @@ app.post("/carts/:cartId/products/:productId", async (req, res) => {
       quantity,
     );
     res.status(200).json({ message: "Producto agregado al carrito", cart });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
-app.put("/products/:productId", async (req, res) => {
-  try {
-    const productId = req.params.productId;
-    const updates = req.body;
-    const products = await productManager.updateProductById(productId, updates);
-    res.status(200).json({ message: "Producto Actualizado", products });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

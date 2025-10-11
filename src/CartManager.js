@@ -60,8 +60,8 @@ class CartManager {
       await this.productManager.getProductById(productId);
       const carts = await this.getCarts();
       const indexCart = await this.getIndexCartById(cartId);
-    //     const indexCart = carts.findIndex((cart) => cart.id === cartId);
-    //   if (indexCart === -1) throw new Error("Carrito no encontrado");
+      //     const indexCart = carts.findIndex((cart) => cart.id === cartId);
+      //   if (indexCart === -1) throw new Error("Carrito no encontrado");
       const cart = carts[indexCart];
       const existingProductIndex = cart.products.findIndex(
         (item) => item.product === productId,
@@ -89,9 +89,9 @@ class CartManager {
     try {
       const carts = await this.getCarts();
       const indexCart = await this.getIndexCartById(cartId);
-    //     const indexCart = carts.findIndex((cart) => cart.id === cartId);
-    //   if (indexCart === -1) throw new Error("Carrito no encontrado");
-    return carts[indexCart].products;
+      //     const indexCart = carts.findIndex((cart) => cart.id === cartId);
+      //   if (indexCart === -1) throw new Error("Carrito no encontrado");
+      return carts[indexCart].products;
     } catch (error) {
       throw new Error(
         "Error al obtener productos del carrito: " + error.message,
