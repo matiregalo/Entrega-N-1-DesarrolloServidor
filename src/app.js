@@ -26,6 +26,16 @@ app.get("/products/:productId", async (req, res) => {
   }
 });
 
+app.get("/carts/:cartId", async (req, res) => {
+  try {
+    const cartId = req.params.cartId;
+    const products = await cartManager.getProductsByCartId(cartId);
+    res.status(200).json({ message: "Productos en el carrito: ", products });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 app.delete("/products/:productId", async (req, res) => {
   try {
     const productId = req.params.productId;
@@ -47,9 +57,23 @@ app.post("/products", async (req, res) => {
 });
 app.post("/carts", async (req, res) => {
   try {
-    const newCart = req.body;
-    const cart = await cartManager.createCart(newCart);
+    const cart = await cartManager.createCart();
     res.status(201).json({ message: "Carrito Creado", cart });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+app.post("/carts/:cartId/products/:productId", async (req, res) => {
+  try {
+    const cartId = req.params.cartId;
+    const productId = req.params.productId;
+    const { quantity = 1 } = req.body;
+    const cart = await cartManager.addProductToCart(
+      cartId,
+      productId,
+      quantity,
+    );
+    res.status(200).json({ message: "Producto agregado al carrito", cart });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

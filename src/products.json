@@ -1,6 +1,6 @@
 [
   {
-    "id": "31e900e5-3fa8-46c0-8411-66b23e8af90c",
+    "id": "6c7b7d47-cbdc-4f1f-ad0f-d8d958c0e73a",
     "title": "string",
     "description": "string",
     "code": "string",
@@ -8,10 +8,14 @@
     "status": true,
     "stock": 1,
     "category": "string",
-    "thumbnails": ["string", "string", "string"]
+    "thumbnails": [
+      "string",
+      "string",
+      "string"
+    ]
   },
   {
-    "id": "0c6ff981-24da-4836-a3b7-054133ad6f8b",
+    "id": "4736b74e-cb2e-4d0b-9406-e869cc29e688",
     "title": "string",
     "description": "string",
     "code": "string",
@@ -19,11 +23,14 @@
     "status": true,
     "stock": 1,
     "category": "string",
-    "thumbnails": ["string", "string", "string"],
-    "casa": ["string", "string", "string"]
+    "thumbnails": [
+      "string",
+      "string",
+      "string"
+    ]
   },
   {
-    "id": "f87af440-0bbd-474a-85cd-4d9a8de9c586",
+    "id": "5ae6abe3-dc44-48d3-9d66-69ec3b0dc22d",
     "title": "string",
     "description": "string",
     "code": "string",
@@ -31,6 +38,25 @@
     "status": true,
     "stock": 1,
     "category": "string",
-    "thumbnails": ["string", "string", "string"]
+    "thumbnails": [
+      "string",
+      "string",
+      "string"
+    ]
+  },
+  {
+    "id": "0b81ae9c-3b34-4fd4-b8e3-5895252015ae",
+    "title": "string",
+    "description": "string",
+    "code": "string",
+    "price": 1200,
+    "status": true,
+    "stock": 1,
+    "category": "string",
+    "thumbnails": [
+      "string",
+      "string",
+      "string"
+    ]
   }
 ]
