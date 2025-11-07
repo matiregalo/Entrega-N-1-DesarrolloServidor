@@ -1,41 +1,35 @@
 [
   {
-    "id": "8ab5487f-8be5-4ce6-bc3d-0bd8cab002cd",
-    "title": "1",
-    "description": "1",
-    "code": "1",
-    "price": 1,
+    "id": "764ce0e4-d092-4185-852f-7ec1692a7052",
+    "title": "iPhone 16 Pro Max",
+    "description": "Pantalla Super Retina XDR de 6.9”, chip A18 Pro, cámara triple de 48 MP, 1 TB de almacenamiento",
+    "code": "IP16PMAX",
+    "price": 800,
     "status": true,
-    "stock": 1,
-    "category": "1",
-    "thumbnails": [
-      "/img/1762550467127-icon.png"
-    ]
+    "stock": 15,
+    "category": "iphones-sellados",
+    "thumbnails": ["/img/1762551359985-iphone-16-pro-max.avif"]
   },
   {
-    "id": "b870190e-87b5-4da2-a5e1-0f65cc9b4b0b",
-    "title": "q",
-    "description": "1",
-    "code": "1",
-    "price": 1,
-    "status": true,
-    "stock": 1,
-    "category": "1",
-    "thumbnails": [
-      "/img/1762550526607-icon.png"
-    ]
+    "id": "70e8a4be-1cb4-4099-98a5-6774e896b7b9",
+    "title": "iPhone 16",
+    "description": "Pantalla OLED de 6.1”, chip A18, cámara dual de 48 MP, batería de larga duración.",
+    "code": "IP16BASE",
+    "price": 900,
+    "status": false,
+    "stock": 0,
+    "category": "iphones-sellados",
+    "thumbnails": ["/img/1762551415731-iphone-16.avif"]
   },
   {
-    "id": "fc711cb7-5c59-4aa9-836b-da3bddcc933d",
-    "title": "qq",
-    "description": "qqq",
-    "code": "qqq",
-    "price": 111111111,
+    "id": "ee4c39de-d33b-440b-b7e7-46371b32b2ca",
+    "title": "iPhone 15 Pro",
+    "description": "Diseño en titanio, chip A17 Pro, cámara de 48 MP con zoom óptico 5x, pantalla ProMotion.",
+    "code": "IP15PRO",
+    "price": 900,
     "status": true,
-    "stock": 111111,
-    "category": "1111111111111111",
-    "thumbnails": [
-      "/img/1762550635717-matiasregaloimagen.jpg"
-    ]
+    "stock": 18,
+    "category": "iphones-sellados",
+    "thumbnails": ["/img/1762551480675-iphone-15-pro.avif"]
   }
 ]
