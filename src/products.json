@@ -77,5 +77,16 @@
     "stock": 1,
     "category": "1",
     "thumbnails": []
+  },
+  {
+    "id": "463da902-0548-4542-b4b5-3272218c4a24",
+    "title": "holastringholastring",
+    "description": "holastringholastring",
+    "code": "111",
+    "price": 11,
+    "status": false,
+    "stock": 111,
+    "category": "1111",
+    "thumbnails": []
   }
 ]
