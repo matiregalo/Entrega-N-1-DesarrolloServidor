@@ -1,26 +1,41 @@
 [
   {
-    "id": "51c7fbd6-29e5-476a-a6df-7c073001195d",
-    "title": "string",
-    "description": "string",
-    "code": "string",
-    "price": 1200,
+    "id": "8ab5487f-8be5-4ce6-bc3d-0bd8cab002cd",
+    "title": "1",
+    "description": "1",
+    "code": "1",
+    "price": 1,
     "status": true,
     "stock": 1,
-    "category": "string",
+    "category": "1",
     "thumbnails": [
-      ""
+      "/img/1762550467127-icon.png"
     ]
   },
   {
-    "id": "6eb3d4bf-ea06-41f8-90db-9e1282609c71",
+    "id": "b870190e-87b5-4da2-a5e1-0f65cc9b4b0b",
     "title": "q",
-    "description": "qq",
-    "code": "qq",
-    "price": 11,
+    "description": "1",
+    "code": "1",
+    "price": 1,
     "status": true,
-    "stock": 111,
-    "category": "111",
-    "thumbnails": []
+    "stock": 1,
+    "category": "1",
+    "thumbnails": [
+      "/img/1762550526607-icon.png"
+    ]
+  },
+  {
+    "id": "fc711cb7-5c59-4aa9-836b-da3bddcc933d",
+    "title": "qq",
+    "description": "qqq",
+    "code": "qqq",
+    "price": 111111111,
+    "status": true,
+    "stock": 111111,
+    "category": "1111111111111111",
+    "thumbnails": [
+      "/img/1762550635717-matiasregaloimagen.jpg"
+    ]
   }
 ]

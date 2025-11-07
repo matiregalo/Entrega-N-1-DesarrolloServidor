@@ -7,65 +7,47 @@ const productManager = new ProductManager("./src/products.json");
 
 const getIO = (req) => req.app.get("io");
 
-productsRouter.get("/", async (req, res) => {
-  try {
-    const products = await productManager.getProducts();
-    res.status(200).json({ message: "Lista de productos", products });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
-productsRouter.get("/:productId", async (req, res) => {
-  try {
-    const productId = req.params.productId;
-    const product = await productManager.getProductById(productId);
-    res.status(200).json({ message: "Producto obtenido: ", product });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
-productsRouter.delete("/:productId", async (req, res) => {
-  try {
-    const productId = req.params.productId;
-    const products = await productManager.deleteProductById(productId);
-    const io = getIO(req);
-    io.emit("product deleted", productId);
-    res.status(200).json({ message: "Producto Eliminado", products });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
 productsRouter.post("/", uploader.single("thumbnails"), async (req, res) => {
   try {
+    console.log("📨 POST /products recibido");
+    console.log("📁 Archivo recibido:", req.file);
+    console.log("📝 Body recibido:", req.body);
+    
     if (!req.file) {
-      return res
-        .status(400)
-        .json({ message: "Falta adjuntar la imagen al formulario" });
+      console.log("❌ No se recibió archivo");
+      return res.status(400).json({ message: "Falta adjuntar la imagen al formulario" });
     }
-    const { title, description, code, price, status, stock, category } =
-      req.body;
+    
+    const { title, description, code, price, status, stock, category } = req.body;
+    console.log("🔧 Procesando datos del producto...");
+    
     const newProduct = {
       title,
       description,
       code,
-      price: Number(price), // Convertir a número
-      status: status === "true" || status === true, // Asegurar booleano
+      price: Number(price),
+      status: status === "true" || status === true,
       stock: Number(stock),
       category,
-      thumbnails: ["/img/" + req.file.filename], // Ruta a la imagen
+      thumbnails: ["/img/" + req.file.filename], // ✅ Ruta correcta
     };
+    
+    console.log("🆕 Producto a crear:", newProduct);
+    
     const product = await productManager.addProduct(newProduct);
+    console.log("✅ Producto creado en el manager:", product);
+    
     const io = getIO(req);
+    console.log("📢 Emitiendo evento 'broadcast new product' via socket");
     io.emit("broadcast new product", product);
+    
+    console.log("📬 Enviando respuesta HTTP 201");
     res.status(201).json({ message: "Producto Agregado", product });
   } catch (error) {
+    console.error("💥 Error en POST /products:", error);
     res.status(500).json({ message: error.message });
   }
 });
-
 productsRouter.put("/:productId", async (req, res) => {
   try {
     const productId = req.params.productId;
