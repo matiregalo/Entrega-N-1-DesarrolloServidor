@@ -7,7 +7,7 @@ const viewsRouter = express.Router();
 const productManager = new ProductManager("./src/products.json");
 const cartManager = new CartManager("./src/carts.json");
 
-viewsRouter.get("/realtimeproducts", async (params) => {
+viewsRouter.get("/realtimeproducts", async (req, res) => {
   try {
     const products = await productManager.getProducts();
     res.render("realTimeProducts", { products });

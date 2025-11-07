@@ -1,5 +1,6 @@
 import express from "express";
 import ProductManager from "../ProductManager.js";
+import uploader from "../utils/uploader.js";
 
 const productsRouter = express.Router();
 const productManager = new ProductManager("./src/products.json");
@@ -29,23 +30,29 @@ productsRouter.delete("/products/:productId", async (req, res) => {
   try {
     const productId = req.params.productId;
     const products = await productManager.deleteProductById(productId);
+    const io = getIO(req);
+    io.emit("product deleted", products);
     res.status(200).json({ message: "Producto Eliminado", products });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-productsRouter.post("/products", async (req, res) => {
-  try {
-    const newProduct = req.body;
-    const product = await productManager.addProduct(newProduct);
-    const io = getIO(req);
-    io.emit("broadcast new product", product);
-    res.status(201).json({ message: "Producto Agregado", product });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+productsRouter.post(
+  "/products",
+  uploader.single("thumbnails"),
+  async (req, res) => {
+    try {
+      const newProduct = req.body;
+      const product = await productManager.addProduct(newProduct);
+      const io = getIO(req);
+      io.emit("broadcast new product", product);
+      res.status(201).json({ message: "Producto Agregado", product });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  },
+);
 
 productsRouter.put("/products/:productId", async (req, res) => {
   try {
