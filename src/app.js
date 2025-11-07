@@ -16,8 +16,7 @@ app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
 app.set("views", "./src/views");
 
-const productManager = new ProductManager("./src/products.json");
-const cartManager = new CartManager("./src/carts.json");
+
 
 server.listen(8080, () => {
   console.log("Servidor iniciado correctamente en el puerto 8080");
