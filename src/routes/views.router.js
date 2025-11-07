@@ -1,11 +1,9 @@
 import express from "express";
 import ProductManager from "../ProductManager.js";
-import CartManager from "../CartManager.js";
 
 const viewsRouter = express.Router();
 
 const productManager = new ProductManager("./src/products.json");
-const cartManager = new CartManager("./src/carts.json");
 
 viewsRouter.get("/realtimeproducts", async (req, res) => {
   try {

@@ -11,5 +11,16 @@
     "thumbnails": [
       ""
     ]
+  },
+  {
+    "id": "6eb3d4bf-ea06-41f8-90db-9e1282609c71",
+    "title": "q",
+    "description": "qq",
+    "code": "qq",
+    "price": 11,
+    "status": true,
+    "stock": 111,
+    "category": "111",
+    "thumbnails": []
   }
 ]
