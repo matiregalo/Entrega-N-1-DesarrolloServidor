@@ -12,7 +12,7 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 app.use(express.json());
-app.use(express.static("src/public")); 
+app.use(express.static("src/public"));
 app.use(express.urlencoded({ extended: true }));
 
 app.engine("handlebars", engine());

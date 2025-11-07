@@ -44,32 +44,28 @@ productsRouter.delete("/:productId", async (req, res) => {
   }
 });
 
-productsRouter.post(
-  "/",
-  uploader.single("thumbnails"),
-  async (req, res) => {
-    try {
-      console.log("Creando nuevo producto");
-      const newProduct = req.body;
-      
-      // Si hay archivo subido, agregar el nombre del archivo a thumbnails
-      if (req.file) {
-        newProduct.thumbnails = [req.file.filename];
-      } else {
-        newProduct.thumbnails = [];
-      }
-      
-      console.log("Datos del producto:", newProduct);
-      const product = await productManager.addProduct(newProduct);
-      const io = getIO(req);
-      io.emit("broadcast new product", product);
-      res.status(201).json({ message: "Producto Agregado", product });
-    } catch (error) {
-      console.error("Error al crear producto:", error);
-      res.status(500).json({ message: error.message });
+productsRouter.post("/", uploader.single("thumbnails"), async (req, res) => {
+  try {
+    console.log("Creando nuevo producto");
+    const newProduct = req.body;
+
+    // Si hay archivo subido, agregar el nombre del archivo a thumbnails
+    if (req.file) {
+      newProduct.thumbnails = [req.file.filename];
+    } else {
+      newProduct.thumbnails = [];
     }
+
+    console.log("Datos del producto:", newProduct);
+    const product = await productManager.addProduct(newProduct);
+    const io = getIO(req);
+    io.emit("broadcast new product", product);
+    res.status(201).json({ message: "Producto Agregado", product });
+  } catch (error) {
+    console.error("Error al crear producto:", error);
+    res.status(500).json({ message: error.message });
   }
-);
+});
 
 productsRouter.put("/:productId", async (req, res) => {
   try {

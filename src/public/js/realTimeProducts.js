@@ -25,21 +25,21 @@ socket.on("connect_error", (error) => {
 productForm.addEventListener("submit", (e) => {
   e.preventDefault();
   console.log("🔄 Formulario enviado - Iniciando proceso...");
-  
+
   const formData = new FormData(productForm);
   const productData = Object.fromEntries(formData.entries());
-  
+
   // Conversión de tipos
   productData.price = parseFloat(productData.price);
   productData.stock = parseInt(productData.stock);
   productData.status = productData.status === "true";
   productData.thumbnails = []; // Temporalmente vacío
-  
+
   console.log("📤 Enviando producto al servidor:", productData);
-  
+
   socket.emit("new product", productData);
   productForm.reset();
-  
+
   console.log("📨 Evento 'new product' emitido");
 });
 
@@ -97,12 +97,12 @@ function addProductToGrid(product) {
 
 function productTemplate(product) {
   console.log("🖼️ Creando template para producto:", product.title);
-  
+
   let thumbnailUrl = "/img/default-product.png";
   if (product.thumbnails && product.thumbnails.length > 0) {
     thumbnailUrl = `/img/${product.thumbnails[0]}`;
   }
-  
+
   return `
     <div class="product-card" data-id="${product.id}">
       <div class="product-image-container">
@@ -113,7 +113,7 @@ function productTemplate(product) {
         <p class="product-description">${product.description}</p>
         <p class="product-code">Código: ${product.code}</p>
         <p class="product-price">Precio: $${product.price}</p>
-        <p class="product-status">Estado: ${product.status ? 'Activo' : 'Inactivo'}</p>
+        <p class="product-status">Estado: ${product.status ? "Activo" : "Inactivo"}</p>
         <p class="product-stock">Stock: ${product.stock}</p>
         <p class="product-category">Categoría: ${product.category}</p>
         <button class="delete-btn" data-id="${product.id}">Eliminar</button>
