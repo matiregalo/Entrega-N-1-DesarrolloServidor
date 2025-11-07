@@ -25,8 +25,7 @@ class ProductManager {
   async getProducts() {
     try {
       const fileData = await fs.readFile(this.pathFile, "utf-8");
-      const products = JSON.parse(fileData);
-      return products;
+      return JSON.parse(fileData);
     } catch (error) {
       throw new Error("Error al traer los productos: " + error.message);
     }
@@ -83,8 +82,7 @@ class ProductManager {
     try {
       await this.validateProduct(newProduct, false);
       const products = await this.getProducts();
-      const newId = this.generateNewId();
-      const product = { id: newId, ...newProduct };
+      const product = { id: this.generateNewId(), ...newProduct };
       products.push(product);
       await this.updateJson(products);
       return product;

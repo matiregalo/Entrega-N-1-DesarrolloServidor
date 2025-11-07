@@ -1,0 +1,68 @@
+<div class="productos">
+  <h1 class="productos-title">Productos en tiempo real</h1>
+
+  <div>
+    <form id="productForm" enctype="multipart/form-data">
+      <input
+        type="text"
+        name="title"
+        id="productTitle"
+        placeholder="Nombre del producto"
+        required
+      />
+      <input
+        type="text"
+        name="description"
+        id="productDescription"
+        placeholder="Descripción"
+        required
+      />
+      <input
+        type="text"
+        name="code"
+        id="productCode"
+        placeholder="Código"
+        required
+      />
+      <input
+        type="number"
+        name="price"
+        id="productPrice"
+        placeholder="Precio"
+        required
+      />
+      <select name="status" required id="productStatus">
+        <option value="true">Activo</option>
+        <option value="false">Inactivo</option>
+      </select>
+      <input
+        type="number"
+        name="stock"
+        id="productStock"
+        placeholder="Stock"
+        required
+      />
+      <input
+        type="text"
+        name="category"
+        id="productCategory"
+        placeholder="Categoría"
+        required
+      />
+      <input
+        type="file"
+        name="thumbnails"
+        id="productThumbnails"
+        placeholder="Imagen del producto"
+        required
+      />
+      <button type="submit">Agregar producto</button>
+    </form>
+  </div>
+
+  <div class="product-grid" id="productGrid">
+  </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/realTimeProducts.js"></script>

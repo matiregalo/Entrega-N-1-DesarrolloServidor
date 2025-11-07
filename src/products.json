@@ -8,6 +8,6 @@
     "status": true,
     "stock": 1,
     "category": "string",
-    "thumbnails": ["1", "string", "string"]
+    "thumbnails": [""]
   }
 ]

@@ -7,20 +7,22 @@ const viewsRouter = express.Router();
 const productManager = new ProductManager("./src/products.json");
 const cartManager = new CartManager("./src/carts.json");
 
-
-/*
-
-
-viewsRouter.get("/", async(req, res)=>{
+viewsRouter.get("/realtimeproducts", async (params) => {
   try {
-    const user = { username: "JoaquinDev", isAdmin: false };
     const products = await productManager.getProducts();
-
-    res.render("dashboard", { products, user });
-    
+    res.render("realTimeProducts", { products });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-});*/
+});
+
+viewsRouter.get("/", async (req, res) => {
+  try {
+    const products = await productManager.getProducts();
+    res.render("home", { products });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 export default viewsRouter;
