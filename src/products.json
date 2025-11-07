@@ -8,6 +8,74 @@
     "status": true,
     "stock": 1,
     "category": "string",
-    "thumbnails": [""]
+    "thumbnails": [
+      ""
+    ]
+  },
+  {
+    "id": "ae02fd68-aed9-44a7-a4fe-300a52ef8fc4",
+    "title": "1",
+    "description": "1",
+    "code": "1",
+    "price": 1,
+    "status": true,
+    "stock": 1,
+    "category": "1",
+    "thumbnails": []
+  },
+  {
+    "id": "fc5e932f-7fdb-46e5-b01b-ed76f05dac76",
+    "title": "1",
+    "description": "1",
+    "code": "1",
+    "price": 1,
+    "status": false,
+    "stock": 1,
+    "category": "1",
+    "thumbnails": []
+  },
+  {
+    "id": "98c5a02d-a7a9-4db4-bf85-66022674be25",
+    "title": "1",
+    "description": "1",
+    "code": "1",
+    "price": 1,
+    "status": false,
+    "stock": 1,
+    "category": "1",
+    "thumbnails": []
+  },
+  {
+    "id": "8f299095-8be3-4f15-bb22-4ebff2c01606",
+    "title": "11",
+    "description": "1",
+    "code": "1",
+    "price": 1,
+    "status": true,
+    "stock": 1,
+    "category": "1",
+    "thumbnails": []
+  },
+  {
+    "id": "9416c8d0-5c9a-4976-8ee9-915ec3b30dc9",
+    "title": "hola",
+    "description": "hola",
+    "code": "hola",
+    "price": 1111,
+    "status": true,
+    "stock": 1,
+    "category": "1",
+    "thumbnails": []
+  },
+  {
+    "id": "7462e250-4abe-4b10-acd8-5ba53c2c5288",
+    "title": "holastring",
+    "description": "string",
+    "code": "string",
+    "price": 1,
+    "status": true,
+    "stock": 1,
+    "category": "1",
+    "thumbnails": []
   }
 ]

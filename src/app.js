@@ -6,18 +6,13 @@ import productsRouter from "./routes/products.router.js";
 import cartsRouter from "./routes/carts.router.js";
 import viewsRouter from "./routes/views.router.js";
 import { configureSocket } from "./sockets/ProductSocket.js";
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "../public"))); // Asegurar ruta correcta
+app.use(express.static("src/public")); 
 app.use(express.urlencoded({ extended: true }));
 
 app.engine("handlebars", engine());
@@ -33,5 +28,5 @@ app.use("/carts", cartsRouter);
 app.set("io", io);
 
 server.listen(8080, () => {
-  console.log("Servidor iniciado correctamente en el puerto 8080");
+  console.log("Servidor iniciado en http://localhost:8080");
 });
