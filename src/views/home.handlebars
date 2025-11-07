@@ -1,16 +1,25 @@
-<div class="product-grid">
+<div>
   {{#each products}}
-    <div class="product-card">
-      <div class="product-image-container">
-        <img class="product-image" src={{this.thumbnail}} alt="" />
+    <div class="item" data-id="{{this.id}}">
+      <div class="img-item-container">
+        <img class="img-item" src="{{this.thumbnails}}" alt="{{this.title}}" />
       </div>
-      <h2 class="product-title">{{this.title}}</h2>
-      <h3 class="product-description">Descrpcion: {{this.description}}</h3>
-      <h3 class="product-code">Codigo: {{this.description}}</h3>
-      <h3 class="product-price">Precio: {{this.price}}</h3>
-      <h3 class="product-status">Estado: {{this.status}}</h3>
-      <h3 class="product-stock">Unidades disponibles: {{this.status}}</h3>
-      <h3 class="product-category">Categoria: {{this.status}}</h3>
+      <div class="text-item">
+        <h2 class="title-item">{{this.title}}</h2>
+        <p class="product-description">{{this.description}}</p>
+        <div class="product-details">
+          <p class="product-code">Código: {{this.code}}</p>
+          <p class="product-status">Estado:
+             {{#if this.status}}Activo{{else}}Inactivo{{/if}}
+          <p class="product-stock">Stock: {{this.stock}}</p>
+          <p class="product-category">Categoría: {{this.category}}</p>
+        </div>
+        <p class="product-price">Precio: ${{this.price}}</p>
+        <button
+          class="button-item delete-btn"
+          data-id="{{this.id}}"
+        >Eliminar</button>
+      </div>
     </div>
   {{/each}}
 </div>
