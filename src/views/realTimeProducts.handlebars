@@ -1,97 +1,98 @@
-<div class="productos">
-  <h1 class="productos-title">Productos en tiempo real</h1>
+<body>
+  <div class="productos">
+    <h1 class="productos-title">Productos en tiempo real</h1>
+    <div class="form-container">
+      <form id="productForm" enctype="multipart/form-data">
+        <div class="form-group">
+          <input
+            type="text"
+            name="title"
+            id="productTitle"
+            placeholder="Nombre del producto"
+            required
+          />
+        </div>
 
-  <div class="form-container">
-    <form id="productForm" enctype="multipart/form-data">
-      <div class="form-group">
-        <input
-          type="text"
-          name="title"
-          id="productTitle"
-          placeholder="Nombre del producto"
-          required
-        />
-      </div>
+        <div class="form-group">
 
-      <div class="form-group">
+          <input
+            type="text"
+            name="description"
+            id="productDescription"
+            placeholder="Descripción"
+            required
+          />
+        </div>
 
-        <input
-          type="text"
-          name="description"
-          id="productDescription"
-          placeholder="Descripción"
-          required
-        />
-      </div>
+        <div class="form-group">
 
-      <div class="form-group">
+          <input
+            type="text"
+            name="code"
+            id="productCode"
+            placeholder="Código"
+            required
+          />
+        </div>
 
-        <input
-          type="text"
-          name="code"
-          id="productCode"
-          placeholder="Código"
-          required
-        />
-      </div>
+        <div class="form-group">
+          <input
+            type="number"
+            name="price"
+            id="productPrice"
+            placeholder="Precio"
+            required
+          />
+        </div>
 
-      <div class="form-group">
-        <input
-          type="number"
-          name="price"
-          id="productPrice"
-          placeholder="Precio"
-          required
-        />
-      </div>
+        <div class="form-group">
 
-      <div class="form-group">
+          <select name="status" required id="productStatus">
+            <option value="">Seleccionar estado</option>
+            <option value="true">Activo</option>
+            <option value="false">Inactivo</option>
+          </select>
+        </div>
 
-        <select name="status" required id="productStatus">
-          <option value="">Seleccionar estado</option>
-          <option value="true">Activo</option>
-          <option value="false">Inactivo</option>
-        </select>
-      </div>
+        <div class="form-group">
 
-      <div class="form-group">
+          <input
+            type="number"
+            name="stock"
+            id="productStock"
+            placeholder="Stock"
+            required
+          />
+        </div>
 
-        <input
-          type="number"
-          name="stock"
-          id="productStock"
-          placeholder="Stock"
-          required
-        />
-      </div>
+        <div class="form-group">
 
-      <div class="form-group">
+          <input
+            type="text"
+            name="category"
+            id="productCategory"
+            placeholder="Categoría"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="file"
+            name="thumbnails"
+            id="productThumbnails"
+            placeholder="Imagen del producto"
+            required
+          />
+          <button type="submit">Agregar producto</button>
+        </div>
 
-        <input
-          type="text"
-          name="category"
-          id="productCategory"
-          placeholder="Categoría"
-          required
-        />
-      </div>
-      <div class="form-group">
-        <input
-          type="file"
-          name="thumbnails"
-          id="productThumbnails"
-          placeholder="Imagen del producto"
-          required
-        />
-        <button type="submit">Agregar producto</button>
-      </div>
+      </form>
+    </div>
 
-    </form>
+    <div class="product-grid" id="productGrid">
+    </div>
   </div>
 
-  <div class="product-grid" id="productGrid">
-  </div>
-</div>
-
-<script src="/socket.io/socket.io.js"></script>
-<script src="/js/realTimeProducts.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/realTimeProducts.js"></script>
+</body>

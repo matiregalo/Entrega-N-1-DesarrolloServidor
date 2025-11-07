@@ -55,21 +55,26 @@ function productTemplate(product) {
     ? product.thumbnails[0]
     : product.thumbnails;
 
-  return `
-    <div class="product-card" data-id="${product.id}">
-      <div class="product-image-container">
-        <img class="product-image" src="${imageUrl}" alt="${product.title}">
-      </div>
-      <div class="product-info">
-        <h2 class="product-title">${product.title}</h2>
-        <p class="product-description">${product.description}</p>
-        <p class="product-code">Código: ${product.code}</p>
-        <p class="product-price">Precio: $${product.price}</p>
-        <p class="product-status">Estado: ${product.status ? "Activo" : "Inactivo"}</p>
-        <p class="product-stock">Stock: ${product.stock}</p>
-        <p class="product-category">Categoría: ${product.category}</p>
-        <button class="delete-btn" data-id="${product.id}">Eliminar</button>
-      </div>
-    </div>
-  `;
+  return `<div class="item" data-id="${product.id}">
+        <div class="img-item-container">
+          <img class="img-item" src="${imageUrl}" alt="${product.title}" />
+        </div>
+        <div class="text-item">
+          <h2 class="title-item">${product.title}</h2>
+          <p class="product-description">${product.description}</p>
+          <div class="product-details">
+            <p class="product-code">Código: ${product.code}</p>
+            <p class="product-status">Estado: ${
+              product.status ? "Activo" : "Inactivo"
+            }</p>
+            <p class="product-stock">Stock: ${product.stock}</p>
+            <p class="product-category">Categoría: ${product.category}</p>
+          </div>
+          <p class="product-price">Precio: $${product.price}</p>
+          <button
+            class="button-item delete-btn"
+            data-id="${product.id}"
+          >Eliminar</button>
+        </div>
+      </div>`;
 }
