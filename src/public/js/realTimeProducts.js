@@ -1,12 +1,11 @@
 const socket = io();
 const productForm = document.getElementById("productForm");
 const productGrid = document.getElementById("productGrid");
-
 productForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const formData = new FormData(productForm);
   try {
-    const response = await fetch("/products", {
+    const response = await fetch("/api/products", {
       method: "POST",
       body: formData,
     });

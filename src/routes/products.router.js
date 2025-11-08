@@ -7,7 +7,7 @@ const productManager = new ProductManager("./src/products.json");
 
 const getIO = (req) => req.app.get("io");
 
-productsRouter.post("/", uploader.single("thumbnails"), async (req, res) => {
+productsRouter.post("/products", uploader.single("thumbnails"), async (req, res) => {
   try {
     if (!req.file) {
       return res
