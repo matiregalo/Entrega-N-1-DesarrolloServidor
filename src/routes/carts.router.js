@@ -4,7 +4,7 @@ import CartManager from "../CartManager.js";
 const cartsRouter = express.Router();
 const cartManager = new CartManager("./src/carts.json");
 
-cartsRouter.post("/carts", async (req, res) => {
+cartsRouter.post("/", async (req, res) => {
   try {
     const cart = await cartManager.createCart();
     res.status(201).json({ message: "Carrito Creado", cart });
@@ -13,7 +13,7 @@ cartsRouter.post("/carts", async (req, res) => {
   }
 });
 
-cartsRouter.get("/carts/:cartId", async (req, res) => {
+cartsRouter.get("/:cartId", async (req, res) => {
   try {
     const cartId = req.params.cartId;
     const products = await cartManager.getProductsByCartId(cartId);
@@ -23,7 +23,7 @@ cartsRouter.get("/carts/:cartId", async (req, res) => {
   }
 });
 
-cartsRouter.post("/carts/:cartId/products/:productId", async (req, res) => {
+cartsRouter.post("/:cartId/products/:productId", async (req, res) => {
   try {
     const cartId = req.params.cartId;
     const productId = req.params.productId;

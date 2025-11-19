@@ -22,8 +22,8 @@ app.set("views", "./src/views");
 configureSocket(io);
 
 app.use("/", viewsRouter);
-app.use("/api", productsRouter);
-app.use("/api", cartsRouter);
+app.use("/api/products", productsRouter);
+app.use("/api/carts", cartsRouter);
 
 app.set("io", io);
 

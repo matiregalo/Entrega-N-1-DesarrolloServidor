@@ -7,7 +7,7 @@ const productManager = new ProductManager("./src/products.json");
 
 const getIO = (req) => req.app.get("io");
 
-productsRouter.post("/products", uploader.single("thumbnails"), async (req, res) => {
+productsRouter.post("/", uploader.single("thumbnails"), async (req, res) => {
   try {
     if (!req.file) {
       return res
@@ -48,7 +48,7 @@ productsRouter.put("/:productId", async (req, res) => {
   }
 });
 
-productsRouter.get("/products", async (req, res) => {
+productsRouter.get("/", async (req, res) => {
   try {
     const products = await productManager.getProducts();
     res.status(200).json({ message: "Lista de productos", products });
@@ -57,7 +57,7 @@ productsRouter.get("/products", async (req, res) => {
   }
 });
 
-productsRouter.get("/products/:productId", async (req, res) => {
+productsRouter.get("/:productId", async (req, res) => {
   try {
     const productId = req.params.productId;
     const product = await productManager.getProductById(productId);
@@ -67,7 +67,7 @@ productsRouter.get("/products/:productId", async (req, res) => {
   }
 });
 
-productsRouter.delete("/products/:productId", async (req, res) => {
+productsRouter.delete("/:productId", async (req, res) => {
   try {
     const productId = req.params.productId;
     const products = await productManager.deleteProductById(productId);
