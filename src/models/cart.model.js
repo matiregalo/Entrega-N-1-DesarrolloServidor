@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import crypto from "crypto";
-import ProductManager from "./ProductManager.js";
+import ProductManager from "./models/ProductManager.js";
 
 class CartManager {
   productManager = new ProductManager("./src/products.json");
