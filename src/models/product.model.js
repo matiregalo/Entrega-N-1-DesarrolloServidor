@@ -1,13 +1,31 @@
+import mongoose, { Schema } from "mongoose";
 import fs from "fs/promises";
-import crypto from "crypto";
 
+const productSchema = new mongoose.Schema({
+  title: String,
+  description: String,
+  code: String,
+  price: Number,
+  status: {
+    type: Boolean,
+    default: true,
+  },
+  created_at: {
+    type: Date,
+    default: Date.now(),
+  },
+  stock: Number,
+  category: String,
+  thumbnails: Object,
+});
+
+const Product = mongoose.model("Product", productSchema);
+
+export default Product;
+/*
 class ProductManager {
   constructor(pathFile) {
     this.pathFile = pathFile;
-  }
-
-  generateNewId() {
-    return crypto.randomUUID();
   }
 
   async updateJson(products) {
@@ -31,52 +49,8 @@ class ProductManager {
     }
   }
 
-  async validateProduct(product, isUpdate = false) {
-    const requiredFields = {
-      title: "string",
-      description: "string",
-      code: "string",
-      price: "number",
-      status: "boolean",
-      stock: "number",
-      category: "string",
-      thumbnails: "object",
-    };
+ 
 
-    for (const field in product) {
-      if (!(field in requiredFields)) {
-        throw new Error(`Atributo no permitido: "${field}"`);
-      }
-    }
-
-    if (!isUpdate) {
-      for (const field in requiredFields) {
-        if (!(field in product)) {
-          throw new Error(`El campo "${field}" es requerido`);
-        }
-      }
-    }
-
-    for (const [field, type] of Object.entries(requiredFields)) {
-      if (field in product) {
-        if (type === "object") {
-          if (!Array.isArray(product[field])) {
-            throw new Error(`El campo "${field}" debe ser un array`);
-          }
-          if (
-            field === "thumbnails" &&
-            !product[field].every((item) => typeof item === "string")
-          ) {
-            throw new Error(
-              "Todos los elementos de thumbnails deben ser strings",
-            );
-          }
-        } else if (typeof product[field] !== type) {
-          throw new Error(`El campo "${field}" debe ser de tipo ${type}`);
-        }
-      }
-    }
-  }
 
   async addProduct(newProduct) {
     try {
@@ -133,4 +107,4 @@ class ProductManager {
   }
 }
 
-export default ProductManager;
+export default ProductManager;*/

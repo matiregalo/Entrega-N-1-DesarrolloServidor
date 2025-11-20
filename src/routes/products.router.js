@@ -1,6 +1,7 @@
 import express from "express";
 import ProductManager from "../models/product.model.js";
 import uploader from "../utils/uploader.js";
+import Product from "../models/product.model.js";
 
 const productsRouter = express.Router();
 const productManager = new ProductManager("./src/products.json");
@@ -50,8 +51,8 @@ productsRouter.put("/:productId", async (req, res) => {
 
 productsRouter.get("/", async (req, res) => {
   try {
-    const products = await productManager.getProducts();
-    res.status(200).json({ message: "Lista de productos", products });
+    const products = await Product.find();
+    res.status(200).json({ message: "Lista de productos",payload: products });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

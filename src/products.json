@@ -8,9 +8,7 @@
     "status": true,
     "stock": 15,
     "category": "iphones-sellados",
-    "thumbnails": [
-      "/img/1762551359985-iphone-16-pro-max.avif"
-    ]
+    "thumbnails": ["/img/1762551359985-iphone-16-pro-max.avif"]
   },
   {
     "id": "b7598edb-7d35-4349-ad13-4cd510782a57",
@@ -21,9 +19,7 @@
     "status": false,
     "stock": 0,
     "category": "iphones-sellados",
-    "thumbnails": [
-      "/img/1762557311763-iphone-16.avif"
-    ]
+    "thumbnails": ["/img/1762557311763-iphone-16.avif"]
   },
   {
     "id": "230add0b-6fef-4204-9f0f-55db96b217e9",
@@ -34,9 +30,7 @@
     "status": true,
     "stock": 18,
     "category": "iphones-sellados",
-    "thumbnails": [
-      "/img/1762557356027-iphone-15-pro.avif"
-    ]
+    "thumbnails": ["/img/1762557356027-iphone-15-pro.avif"]
   },
   {
     "id": "561a6d9e-56e6-4a81-be66-df9c9f411704",
@@ -47,9 +41,7 @@
     "status": true,
     "stock": 25,
     "category": "iphones-seminuevos",
-    "thumbnails": [
-      "/img/1762557407145-iphone-15.avif"
-    ]
+    "thumbnails": ["/img/1762557407145-iphone-15.avif"]
   },
   {
     "id": "9b8cc7d1-3c0c-4c93-9dd8-caa12357a25f",
@@ -60,9 +52,7 @@
     "status": true,
     "stock": 10,
     "category": " iphones-seminuevos",
-    "thumbnails": [
-      "/img/1762557463022-iphone-14-pro-max.avif"
-    ]
+    "thumbnails": ["/img/1762557463022-iphone-14-pro-max.avif"]
   },
   {
     "id": "5a705888-04f2-47eb-9287-80bb168315ee",
@@ -73,9 +63,7 @@
     "status": true,
     "stock": 30,
     "category": "iphones-seminuevos",
-    "thumbnails": [
-      "/img/1762557506441-iphone-14.avif"
-    ]
+    "thumbnails": ["/img/1762557506441-iphone-14.avif"]
   },
   {
     "id": "86867930-1cca-40a7-bda4-28a00e159a74",
@@ -86,9 +74,7 @@
     "status": true,
     "stock": 12,
     "category": "iphones-seminuevos",
-    "thumbnails": [
-      "/img/1762557554609-iphone-13-pro.avif"
-    ]
+    "thumbnails": ["/img/1762557554609-iphone-13-pro.avif"]
   },
   {
     "id": "006ba5a6-cc1f-4a71-b066-8b9bedc3c232",
@@ -99,9 +85,7 @@
     "status": true,
     "stock": 8,
     "category": "iphones-seminuevos",
-    "thumbnails": [
-      "/img/1762557595404-iphone-13-mini.avif"
-    ]
+    "thumbnails": ["/img/1762557595404-iphone-13-mini.avif"]
   },
   {
     "id": "8cbdafc2-8bab-4a5e-8f46-770947e4f463",
@@ -112,9 +96,7 @@
     "status": true,
     "stock": 22,
     "category": "iphones-seminuevos",
-    "thumbnails": [
-      "/img/1762557643015-iphone-se-3ageneracion.avif"
-    ]
+    "thumbnails": ["/img/1762557643015-iphone-se-3ageneracion.avif"]
   },
   {
     "id": "892a4687-18cd-4b6f-aedc-14606b2867cd",
@@ -125,8 +107,6 @@
     "status": true,
     "stock": 17,
     "category": "iphones-seminuevos",
-    "thumbnails": [
-      "/img/1762557679054-iphone-12.avif"
-    ]
+    "thumbnails": ["/img/1762557679054-iphone-12.avif"]
   }
 ]

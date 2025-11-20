@@ -28,16 +28,18 @@ app.use("/api/carts", cartsRouter);
 
 app.set("io", io);
 
-const connectMongoDB = async()=>{
+const connectMongoDB = async () => {
   try {
-    await mongoose.connect("mongodb+srv://coder:mHTdZgDPws70dLNS@ecommerce-cluster.uri2xql.mongodb.net/myEcommerce?appName=Ecommerce-cluster")
-    console.log("Conectado con MONGODB")
+    await mongoose.connect(
+      "mongodb+srv://coder:mHTdZgDPws70dLNS@ecommerce-cluster.uri2xql.mongodb.net/myEcommerce?appName=Ecommerce-cluster",
+    );
+    console.log("Conectado con MONGODB");
   } catch (error) {
-    console.log("Error al conectar con MongoDB" + error)
+    console.log("Error al conectar con MongoDB" + error);
   }
-}
+};
 
-connectMongoDB()
+connectMongoDB();
 
 server.listen(8080, () => {
   console.log("Servidor iniciado en http://localhost:8080");
