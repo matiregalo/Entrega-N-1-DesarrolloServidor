@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/matiregalo/Entrega-N-1-DesarrolloServidor#readme",
   "dependencies": {
+    "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "express-handlebars": "^8.0.3",
     "mongoose": "^8.20.0",
