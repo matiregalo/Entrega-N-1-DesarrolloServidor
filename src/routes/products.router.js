@@ -39,6 +39,7 @@ productsRouter.post(
     }
   },
 );
+
 productsRouter.put("/:productId", async (req, res) => {
   try {
     const productId = req.params.productId;
@@ -59,8 +60,13 @@ productsRouter.put("/:productId", async (req, res) => {
 
 productsRouter.get("/", async (req, res) => {
   try {
-    const products = await Product.find();
-    res.status(200).json({ message: "Lista de productos", payload: products });
+    const { limit = 10, page = 1 } = req.query;
+    const data = await Product.paginate({}, { limit, page });
+    const products = data.docs;
+    delete data.docs;
+    res
+      .status(200)
+      .json({ message: "Lista de productos", payload: products, ...data });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
