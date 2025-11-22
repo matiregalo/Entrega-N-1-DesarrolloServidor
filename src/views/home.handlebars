@@ -14,7 +14,7 @@
         {{/each}}
       </select>
     </div>
-    
+
     <div class="filter-group">
       <label for="sortFilter" class="filter-label">Ordenar por:</label>
       <select id="sortFilter" name="sort" class="filter-select">
@@ -25,82 +25,40 @@
     </div>
   </div>
 
-<div class="product-grid">
-  {{#each products}}
-    <div class="item" data-id="{{this.id}}">
-      <div class="img-item-container">
-        <img class="img-item" src="{{this.thumbnails}}" alt="{{this.title}}" />
-      </div>
-      <div class="text-item">
-        <h2 class="title-item">{{this.title}}</h2>
-        <p class="product-description">{{this.description}}</p>
-        <div class="product-details">
-          <p class="product-code">Código: {{this.code}}</p>
-          <p class="product-status">Estado:
-            {{#if this.status}}Activo{{else}}Inactivo{{/if}}</p>
-          <p class="product-stock">Stock: {{this.stock}}</p>
-          <p class="product-category">Categoría: {{this.category}}</p>
+  <div class="product-grid">
+    {{#each products}}
+      <div class="item" data-id="{{this.id}}">
+        <div class="img-item-container">
+          <img
+            class="img-item"
+            src="{{this.thumbnails}}"
+            alt="{{this.title}}"
+          />
         </div>
-        <p class="product-price">Precio: ${{this.price}}</p>
-        <button
-          class="button-item delete-btn"
-          data-id="{{this.id}}"
-        >Eliminar</button>
+        <div class="text-item">
+          <h2 class="title-item">{{this.title}}</h2>
+          <p class="product-description">{{this.description}}</p>
+          <div class="product-details">
+            <p class="product-code">Código: {{this.code}}</p>
+            <p class="product-status">Estado:
+              {{#if this.status}}Activo{{else}}Inactivo{{/if}}</p>
+            <p class="product-stock">Stock: {{this.stock}}</p>
+            <p class="product-category">Categoría: {{this.category}}</p>
+          </div>
+          <p class="product-price">Precio: ${{this.price}}</p>
+          <button
+            class="button-item delete-btn"
+            data-id="{{this.id}}"
+          >Eliminar</button>
+        </div>
       </div>
-    </div>
-  {{/each}}
-</div>
+    {{/each}}
+  </div>
 
 <div class="pagination-container">
   {{#each links}}
     <a href="{{this.link}}">{{this.text}}</a>
   {{/each}}
 </div>
-
-<script>
-  // Establecer valores seleccionados al cargar la página
-  const urlParams = new URLSearchParams(window.location.search);
-  const selectedCategory = urlParams.get("category") || "all";
-  const selectedSort = urlParams.get("sort") || "default";
-  
-  const categoryFilter = document.getElementById("categoryFilter");
-  const sortFilter = document.getElementById("sortFilter");
-  
-  if (categoryFilter) {
-    categoryFilter.value = selectedCategory;
-  }
-  if (sortFilter) {
-    sortFilter.value = selectedSort;
-  }
-
-  // Manejar cambio de categoría
-  categoryFilter?.addEventListener("change", function() {
-    const category = this.value;
-    const url = new URL(window.location.href);
-    
-    if (category === "all") {
-      url.searchParams.delete("category");
-    } else {
-      url.searchParams.set("category", category);
-    }
-    url.searchParams.set("page", "1");
-    
-    window.location.href = url.toString();
-  });
-
-  // Manejar cambio de ordenamiento
-  sortFilter?.addEventListener("change", function() {
-    const sort = this.value;
-    const url = new URL(window.location.href);
-    
-    if (sort === "default") {
-      url.searchParams.delete("sort");
-    } else {
-      url.searchParams.set("sort", sort);
-    }
-    
-    url.searchParams.set("page", "1");
-    
-    window.location.href = url.toString();
-  });
-</script>
+</div>
+<script src="/js/home.js"></script>
