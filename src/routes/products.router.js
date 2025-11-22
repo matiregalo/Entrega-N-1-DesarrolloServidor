@@ -1,44 +1,29 @@
 import express from "express";
-import uploader from "../utils/uploader.js";
 import Product from "../models/product.model.js";
 
 const productsRouter = express.Router();
 
-// const getIO = (req) => req.app.get("io");
+productsRouter.post("/", async (req, res) => {
+  try {
+    const { title, description, code, price, stock, category, thumbnails } =
+      req.body;
 
-productsRouter.post(
-  "/",
-  //uploader.single("thumbnails"),
-  async (req, res) => {
-    try {
-      // if (!req.file) {
-      //   return res
-      //     .status(400)
-      //     .json({ message: "Falta adjuntar la imagen al formulario" });
-      // }
-
-      const { title, description, code, price, status, stock, category } =
-        req.body;
-
-      const newProduct = {
-        title,
-        description,
-        code,
-        price: Number(price),
-        stock: Number(stock),
-        category,
-        //thumbnails: ["/img/" + req.file.filename],
-      };
-      const product = new Product(newProduct);
-      await product.save();
-      // const io = getIO(req);
-      // io.emit("broadcast new product", product);
-      res.status(201).json({ message: "Producto Agregado", payload: product });
-    } catch (error) {
-      res.status(500).json({ message: "Error al agregar el producto" });
-    }
-  },
-);
+    const newProduct = {
+      title,
+      description,
+      code,
+      price: Number(price),
+      stock: Number(stock),
+      category,
+      thumbnails: ["/img/" + req.file.filename],
+    };
+    const product = new Product(newProduct);
+    await product.save();
+    res.status(201).json({ message: "Producto Agregado", payload: product });
+  } catch (error) {
+    res.status(500).json({ message: "Error al agregar el producto" });
+  }
+});
 
 productsRouter.put("/:productId", async (req, res) => {
   try {
@@ -92,16 +77,6 @@ productsRouter.get("/", async (req, res) => {
     res.status(500).json({ status: "error" });
   }
 });
-
-// productsRouter.get("/:productId", async (req, res) => {
-//   try {
-//     const productId = req.params.productId;
-//     const product = await productManager.getProductById(productId);
-//     res.status(200).json({ message: "Producto obtenido: ", product });
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// });
 
 productsRouter.delete("/:productId", async (req, res) => {
   try {

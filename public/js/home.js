@@ -39,4 +39,3 @@ sortFilter?.addEventListener("change", function () {
 
   window.location.href = url.toString();
 });
-

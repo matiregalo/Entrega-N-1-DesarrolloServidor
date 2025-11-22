@@ -26,17 +26,3 @@ productSchema.plugin(paginate);
 const Product = mongoose.model("Product", productSchema);
 
 export default Product;
-/*
-  
-  async getProductById(productId) {
-    try {
-      const products = await this.getProducts();
-      const product = products.find((product) => product.id === productId);
-      if (!product) throw new Error("Producto no encontrado");
-      return product;
-    } catch (error) {
-      throw new Error("Error al retornar el producto: " + error.message);
-    }
-  }
-}
-*/
