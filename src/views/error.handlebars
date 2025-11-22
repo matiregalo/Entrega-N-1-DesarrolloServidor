@@ -1,0 +1,39 @@
+<div>
+  {{#each errors}}
+    <div class="not-found-container">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-6 col-md-8 text-center">
+            <div class="not-found-iphone mb-4">
+              <div class="not-found-frame">
+                <div class="not-found-screen">
+                  <div class="not-found-content">
+                    <div class="not-found-icon">📱</div>
+                    <div class="not-found-code">{{this.code}}</div>
+                    <div class="not-found-message">
+                      {{this.message}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="not-found-home-button"></div>
+            </div>
+
+            <div class="not-found-text mb-4">
+              <h1 class="display-5 fw-bold text-dark mb-3">
+                ¡Ups! Algo salió mal
+              </h1>
+              <p class="lead text-muted mb-4">
+                Redirigete a la página de inicio o contacta ha soporte si el
+                error sigue persistiendo.
+              </p>
+              <button class="not-found-button" onclick="window.location.href='/'">
+                Reintentar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+</div>

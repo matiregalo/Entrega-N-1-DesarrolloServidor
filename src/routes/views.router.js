@@ -14,18 +14,25 @@ const viewsRouter = express.Router();
 
 viewsRouter.get("/", async (req, res) => {
   try {
-    const { limit = 10, page = 1 } = req.query;
-    const data = await Product.paginate({}, { limit, page, lean: true });
+    const { limit = 10, page = 1, category } = req.query;
+    const data = await Product.paginate(category, { limit, page, lean: true });
     const products = data.docs;
     delete data.docs;
-    const links = []
-    for(let i=1; i <= data.totalPages; i++){
-        links.push({text: i, link: `?limit=${limit}&page=${i}`})
+    const links = [];
+    for (let i = 1; i <= data.totalPages; i++) {
+      queryParams.set("page", i);
+      links.push({ text: i, link: `?${queryParams.toString()}` });
     }
-    res.render("home", { products, links });
+    res.render("home", { products, links, selectedCategory: category || "all" });
   } catch (error) {
-    //renderizar a una plantilla de error borrar res status y json
-    res.status(500).json({ message: error.message });
+    res.status(500).render("error", {
+      errors: [
+        {
+          code: 500,
+          message: error.message || "Error al cargar los productos",
+        },
+      ],
+    });
   }
 });
 
