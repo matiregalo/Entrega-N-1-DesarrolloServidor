@@ -1,5 +1,6 @@
 import Cart from "../models/cart.model.js";
 import express from "express";
+import mongoose from "mongoose";
 
 const cartsRouter = express.Router();
 
@@ -43,6 +44,45 @@ cartsRouter.get("/:cartId", async (req, res) => {
       .json({ message: "Productos en el carrito: ", payload: cart.products });
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+});
+
+cartsRouter.delete("/:cartId/products/:productId", async (req, res) => {
+  try {
+    const { cartId, productId } = req.params;
+    const cart = await Cart.findById(cartId);
+    if (!cart) {
+      return res.status(404).json({
+        status: "error",
+        message: "Carrito no encontrado",
+      });
+    }
+    const productExists = cart.products.some(
+      (item) => item.product.toString() === productId,
+    );
+
+    if (!productExists) {
+      return res.status(404).json({
+        status: "error",
+        message: "Producto no encontrado en el carrito",
+      });
+    }
+    const updatedCart = await Cart.findByIdAndUpdate(
+      cartId,
+      {
+        $pull: { products: { product: productId } },
+      },
+      { new: true, runValidators: true },
+    ).populate("products.product");
+
+    res.status(200).json({
+      message: "Producto eliminado del carrito",
+      payload: updatedCart,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error al eliminar el producto del carrito" });
   }
 });
 

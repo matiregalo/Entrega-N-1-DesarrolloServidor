@@ -1,6 +1,7 @@
 import express from "express";
 import http from "http";
 import { engine } from "express-handlebars";
+import Handlebars from "handlebars";
 //import { Server } from "socket.io";
 import dotenv from "dotenv";
 import connectMongoDB from "./config/db.js";

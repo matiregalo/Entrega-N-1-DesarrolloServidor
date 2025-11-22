@@ -60,15 +60,36 @@ productsRouter.put("/:productId", async (req, res) => {
 
 productsRouter.get("/", async (req, res) => {
   try {
-    const { limit = 10, page = 1 } = req.query;
-    const data = await Product.paginate({}, { limit, page });
+    const { limit = 10, page = 1, category, sort } = req.query;
+    const filter = {};
+    if (category && category !== "all") {
+      filter.category = category;
+    }
+    let sortOption = {};
+    if (sort === "price:asc") {
+      sortOption = { price: 1 };
+    } else if (sort === "price:desc") {
+      sortOption = { price: -1 };
+    } else {
+      sortOption = { created_at: -1 };
+    }
+
+    const data = await Product.paginate(filter, {
+      limit: parseInt(limit),
+      page: parseInt(page),
+      sort: sortOption,
+    });
+
     const products = data.docs;
     delete data.docs;
-    res
-      .status(200)
-      .json({ message: "Lista de productos", payload: products, ...data });
+
+    res.status(200).json({
+      status: "success",
+      payload: products,
+      ...data,
+    });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ status: "error" });
   }
 });
 

@@ -1,12 +1,29 @@
-<div class="filter-container" style="margin-bottom: 20px; padding: 15px; background-color: #f8f9fa; border-radius: 8px;">
-  <label for="categoryFilter" style="margin-right: 10px; font-weight: bold;">Filtrar por categoría:</label>
-  <select id="categoryFilter" name="category" style="padding: 8px 12px; border-radius: 4px; border: 1px solid #ddd; font-size: 16px;">
-    <option value="all" {{#if (eq selectedCategory "all")}}selected{{/if}}>Todas las categorías</option>
-    {{#each categories}}
-      <option value="{{this}}" {{#if (eq ../selectedCategory this)}}selected{{/if}}>{{this}}</option>
-    {{/each}}
-  </select>
-</div>
+<div class="item-list-container">
+  <div class="container-header">
+    <h1 class="page-title">Productos</h1>
+    <p class="page-subtitle">Explora nuestra selección de iPhones</p>
+  </div>
+
+  <div class="filter-container">
+    <div class="filter-group">
+      <label for="categoryFilter" class="filter-label">Filtrar por categoría:</label>
+      <select id="categoryFilter" name="category" class="filter-select">
+        <option value="all">Todas las categorías</option>
+        {{#each categories}}
+          <option value="{{this}}">{{this}}</option>
+        {{/each}}
+      </select>
+    </div>
+    
+    <div class="filter-group">
+      <label for="sortFilter" class="filter-label">Ordenar por:</label>
+      <select id="sortFilter" name="sort" class="filter-select">
+        <option value="default">Más recientes</option>
+        <option value="price:asc">Precio: Menor a Mayor</option>
+        <option value="price:desc">Precio: Mayor a Menor</option>
+      </select>
+    </div>
+  </div>
 
 <div class="product-grid">
   {{#each products}}
@@ -34,14 +51,30 @@
   {{/each}}
 </div>
 
-<div>
+<div class="pagination-container">
   {{#each links}}
     <a href="{{this.link}}">{{this.text}}</a>
   {{/each}}
 </div>
 
 <script>
-  document.getElementById("categoryFilter").addEventListener("change", function() {
+  // Establecer valores seleccionados al cargar la página
+  const urlParams = new URLSearchParams(window.location.search);
+  const selectedCategory = urlParams.get("category") || "all";
+  const selectedSort = urlParams.get("sort") || "default";
+  
+  const categoryFilter = document.getElementById("categoryFilter");
+  const sortFilter = document.getElementById("sortFilter");
+  
+  if (categoryFilter) {
+    categoryFilter.value = selectedCategory;
+  }
+  if (sortFilter) {
+    sortFilter.value = selectedSort;
+  }
+
+  // Manejar cambio de categoría
+  categoryFilter?.addEventListener("change", function() {
     const category = this.value;
     const url = new URL(window.location.href);
     
@@ -50,8 +83,22 @@
     } else {
       url.searchParams.set("category", category);
     }
+    url.searchParams.set("page", "1");
     
-    // Resetear a página 1 cuando cambia la categoría
+    window.location.href = url.toString();
+  });
+
+  // Manejar cambio de ordenamiento
+  sortFilter?.addEventListener("change", function() {
+    const sort = this.value;
+    const url = new URL(window.location.href);
+    
+    if (sort === "default") {
+      url.searchParams.delete("sort");
+    } else {
+      url.searchParams.set("sort", sort);
+    }
+    
     url.searchParams.set("page", "1");
     
     window.location.href = url.toString();

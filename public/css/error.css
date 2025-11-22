@@ -101,7 +101,7 @@
   justify-content: center;
   gap: 10px;
   transition: all 0.3s ease;
-  box-shadow: 
+  box-shadow:
     0 8px 20px rgba(0, 123, 255, 0.3),
     0 4px 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -111,7 +111,7 @@
 
 .not-found-button:hover {
   transform: translateY(-2px);
-  box-shadow: 
+  box-shadow:
     0 12px 25px rgba(0, 123, 255, 0.4),
     0 6px 15px rgba(0, 0, 0, 0.15);
   color: white;
@@ -120,7 +120,7 @@
 
 .not-found-button:active {
   transform: translateY(0);
-  box-shadow: 
+  box-shadow:
     0 4px 10px rgba(0, 123, 255, 0.3),
     0 2px 5px rgba(0, 0, 0, 0.1);
 }
