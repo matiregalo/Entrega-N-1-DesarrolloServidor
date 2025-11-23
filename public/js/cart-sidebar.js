@@ -123,17 +123,14 @@ async function showCartSidebar(forceShow = false) {
     return;
   }
 
-  // Si forceShow es true, marcar que se está mostrando manualmente
   if (forceShow) {
     isManuallyShowing = true;
-    // Prevenir que loadCartOnInit interfiera
     loadCartOnInitExecuted = true;
   }
 
   const cart = await getOrCreateCart();
   if (!cart) {
     if (forceShow) {
-      // Mostrar mensaje de carga
       const cartSidebarContent = document.getElementById("cartSidebarContent");
       if (cartSidebarContent) {
         cartSidebarContent.innerHTML =
@@ -146,9 +143,7 @@ async function showCartSidebar(forceShow = false) {
     return;
   }
 
-  // Si forceShow es true, mostrar primero "Cargando..." y luego intentar obtener el carrito
   if (forceShow) {
-    // Mostrar el sidebar inmediatamente con mensaje de carga
     const cartSidebarContent = document.getElementById("cartSidebarContent");
     if (cartSidebarContent) {
       cartSidebarContent.innerHTML =
@@ -159,15 +154,13 @@ async function showCartSidebar(forceShow = false) {
     cartSidebar.style.transform = "translateX(0)";
   }
 
-  // Intentar obtener el carrito con múltiples intentos si forceShow es true
   let cartData = null;
   if (forceShow) {
-    // Intentar hasta 6 veces con esperas incrementales
     for (let attempt = 0; attempt < 6; attempt++) {
-      await new Promise((resolve) => setTimeout(resolve, 300 * (attempt + 1))); // 300ms, 600ms, 900ms, 1200ms, 1500ms, 1800ms
+      await new Promise((resolve) => setTimeout(resolve, 300 * (attempt + 1)));
       cartData = await fetchCart(cart);
       if (cartData && cartData.length > 0) {
-        break; // Si encontramos productos, salir del loop
+        break; 
       }
     }
   } else {
@@ -179,11 +172,8 @@ async function showCartSidebar(forceShow = false) {
     cartSidebar.style.display = "block";
     cartSidebar.offsetHeight;
     cartSidebar.style.transform = "translateX(0)";
-    // NO resetear isManuallyShowing cuando forceShow es true - mantener el carrito abierto
   } else {
-    // Si no hay productos
     if (forceShow) {
-      // Si forceShow es true, mantener el carrito abierto y seguir intentando
       const cartSidebarContent = document.getElementById("cartSidebarContent");
       if (cartSidebarContent) {
         cartSidebarContent.innerHTML =
@@ -193,13 +183,11 @@ async function showCartSidebar(forceShow = false) {
       cartSidebar.offsetHeight;
       cartSidebar.style.transform = "translateX(0)";
 
-      // Intentar recargar el carrito después de un momento más largo
       setTimeout(async () => {
         const updatedCartData = await fetchCart(cart);
         if (updatedCartData && updatedCartData.length > 0) {
           renderCartSidebar(updatedCartData);
         } else {
-          // Si aún no hay productos, mostrar carrito vacío pero mantenerlo abierto
           const cartSidebarContent =
             document.getElementById("cartSidebarContent");
           if (cartSidebarContent) {
@@ -209,7 +197,6 @@ async function showCartSidebar(forceShow = false) {
         }
       }, 1500);
     } else {
-      // Si no hay productos y no se fuerza, ocultar el carrito
       renderCartSidebar([]);
       cartSidebar.style.transform = "translateX(100%)";
       setTimeout(() => {
@@ -229,20 +216,14 @@ function hideCartSidebar() {
   }
 }
 
-// Variable para rastrear si el carrito se está mostrando manualmente
 let isManuallyShowing = false;
 let loadCartOnInitExecuted = false;
 
-/**
- * Carga el carrito automáticamente al iniciar la página si hay productos
- */
 async function loadCartOnInit() {
-  // No cargar automáticamente si el carrito se está mostrando manualmente
   if (isManuallyShowing) {
     return;
   }
 
-  // Solo ejecutar una vez
   if (loadCartOnInitExecuted) {
     return;
   }
@@ -254,7 +235,6 @@ async function loadCartOnInit() {
 
   const cartData = await fetchCart(cart);
   if (cartData && cartData.length > 0) {
-    // Solo mostrar si el carrito no está ya visible
     const cartSidebar = document.getElementById("cartSidebar");
     if (cartSidebar && cartSidebar.style.display !== "block") {
       renderCartSidebar(cartData);
@@ -280,7 +260,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Cargar el carrito automáticamente si hay productos
   loadCartOnInit();
 });
 

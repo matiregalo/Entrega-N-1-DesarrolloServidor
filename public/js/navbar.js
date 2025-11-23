@@ -6,11 +6,9 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       e.stopPropagation();
 
-      // Esperar a que el script del sidebar esté disponible
       if (window.showCartSidebar) {
         await window.showCartSidebar();
       } else {
-        // Si no está disponible, esperar un poco y volver a intentar
         setTimeout(async () => {
           if (window.showCartSidebar) {
             await window.showCartSidebar();

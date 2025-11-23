@@ -79,20 +79,15 @@ document.addEventListener("DOMContentLoaded", () => {
       const success = await addToCart(productId);
 
       if (success) {
-        // Esperar un poco para asegurar que el carrito se actualizó en el servidor
         await new Promise((resolve) => setTimeout(resolve, 300));
-
-        // Mostrar el sidebar del carrito - esperar hasta que esté disponible
         let attempts = 0;
-        const maxAttempts = 40; // Aumentar intentos a 40 (2 segundos)
+        const maxAttempts = 40; 
         while (!window.showCartSidebar && attempts < maxAttempts) {
           await new Promise((resolve) => setTimeout(resolve, 50));
           attempts++;
         }
 
         if (window.showCartSidebar) {
-          // Forzar mostrar el sidebar después de agregar un producto
-          // La función showCartSidebar ahora maneja los reintentos internamente
           await window.showCartSidebar(true);
         } else {
           console.error(
@@ -103,7 +98,6 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (error) {
       console.error("Error al agregar producto:", error);
     } finally {
-      // Asegurarse de que el botón siempre se rehabilite
       addToCartBtn.disabled = false;
       addToCartBtn.textContent = originalText;
     }
