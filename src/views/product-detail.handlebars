@@ -1,0 +1,65 @@
+<div class="product-detail-container">
+  <div class="product-detail-wrapper">
+    <a href="/" class="back-button">
+      ← Volver a productos
+    </a>
+
+    <div class="product-detail-content">
+      <div class="product-image-section">
+        <div class="product-image-container">
+          <img
+            src="{{product.thumbnails.[0]}}"
+            alt="{{product.title}}"
+            class="product-detail-image"
+          />
+        </div>
+      </div>
+
+      <div class="product-info-section">
+        <h1 class="product-detail-title">{{product.title}}</h1>
+
+        <div class="product-detail-price">
+          <span class="price-label">Precio:</span>
+          <span class="price-value">${{product.price}}</span>
+        </div>
+
+        <div class="product-detail-description">
+          <h3>Descripción</h3>
+          <p>{{product.description}}</p>
+        </div>
+
+        <div class="product-detail-specs">
+          <div class="spec-item">
+            <span class="spec-label">Categoría:</span>
+            <span class="spec-value">{{product.category}}</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Código:</span>
+            <span class="spec-value">{{product.code}}</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Stock disponible:</span>
+            <span class="spec-value">{{product.stock}} unidades</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Estado:</span>
+            <p class="product-status">Estado:
+              {{#if product.status}}Activo{{else}}Inactivo{{/if}}</p>
+          </div>
+        </div>
+
+        <div class="add-to-cart-section">
+          <button
+            id="addToCartBtn"
+            class="add-to-cart-btn"
+            data-product-id="{{product._id}}"
+          >
+            Agregar al carrito
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/product-detail.js"></script>
