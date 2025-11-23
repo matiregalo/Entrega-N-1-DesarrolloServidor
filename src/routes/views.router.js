@@ -1,5 +1,6 @@
 import express from "express";
 import Product from "../models/product.model.js";
+import Cart from "../models/cart.model.js";
 
 const viewsRouter = express.Router();
 
@@ -51,7 +52,68 @@ viewsRouter.get("/", async (req, res) => {
       errors: [
         {
           code: 500,
-          message: error.message || "Error al cargar los productos",
+          message: "Error al cargar los productos",
+        },
+      ],
+    });
+  }
+});
+
+viewsRouter.get("/products/:productId", async (req, res) => {
+  try {
+    const { productId } = req.params;
+    const product = await Product.findById(productId).lean();
+
+    if (!product) {
+      return res.status(404).render("error", {
+        errors: [
+          {
+            code: 404,
+            message: "Producto no encontrado",
+          },
+        ],
+      });
+    }
+
+    res.render("product-detail", {
+      product,
+    });
+  } catch (error) {
+    res.status(500).render("error", {
+      errors: [
+        {
+          code: 500,
+          message: "Error al cargar el producto",
+        },
+      ],
+    });
+  }
+});
+
+viewsRouter.get("/carts/:cid", async (req, res) => {
+  try {
+    const { cid } = req.params;
+    const cart = await Cart.findById(cid).populate("products.product").lean();
+
+    if (!cart) {
+      return res.status(404).render("error", {
+        errors: [
+          {
+            code: 404,
+            message: "Carrito no encontrado",
+          },
+        ],
+      });
+    }
+    res.render("cart", {
+      cart,
+    });
+  } catch (error) {
+    res.status(500).render("error", {
+      errors: [
+        {
+          code: 500,
+          message: "Error al cargar el carrito",
         },
       ],
     });

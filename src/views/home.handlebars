@@ -27,31 +27,24 @@
 
   <div class="product-grid">
     {{#each products}}
-      <div class="item" data-id="{{this.id}}">
-        <div class="img-item-container">
-          <img
-            class="img-item"
-            src="{{this.thumbnails}}"
-            alt="{{this.title}}"
-          />
-        </div>
-        <div class="text-item">
-          <h2 class="title-item">{{this.title}}</h2>
-          <p class="product-description">{{this.description}}</p>
-          <div class="product-details">
-            <p class="product-code">Código: {{this.code}}</p>
-            <p class="product-status">Estado:
-              {{#if this.status}}Activo{{else}}Inactivo{{/if}}</p>
-            <p class="product-stock">Stock: {{this.stock}}</p>
-            <p class="product-category">Categoría: {{this.category}}</p>
+      <a href="/products/{{this._id}}" class="item-link">
+        <div class="item" data-id="{{this._id}}">
+          <div class="img-item-container">
+            <img
+              class="img-item"
+              src="{{this.thumbnails.[0]}}"
+              alt="{{this.title}}"
+            />
           </div>
-          <p class="product-price">Precio: ${{this.price}}</p>
-          <button
-            class="button-item delete-btn"
-            data-id="{{this.id}}"
-          >Eliminar</button>
+          <div class="text-item">
+            <h2 class="title-item">{{this.title}}</h2>
+            <div class="product-details">
+              <p class="product-category">Categoría: {{this.category}}</p>
+            </div>
+            <p class="product-price">Precio: ${{this.price}}</p>
+          </div>
         </div>
-      </div>
+      </a>
     {{/each}}
   </div>
 

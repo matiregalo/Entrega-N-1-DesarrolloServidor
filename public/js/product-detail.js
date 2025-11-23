@@ -1,19 +1,13 @@
 const API_BASE_URL = "/api/carts";
 
-/**
- * Agrega un producto al carrito y muestra el sidebar
- */
 async function addToCart(productId) {
   if (!productId) {
-    return null;
+    return false;
   }
-
-  // Obtener o crear carrito usando la función del cart-sidebar.js
   let cart = null;
   if (window.getOrCreateCart) {
     cart = await window.getOrCreateCart();
   } else {
-    // Fallback si el script no está cargado
     const savedCartId = localStorage.getItem("cartId");
     if (savedCartId) {
       cart = savedCartId;
@@ -32,13 +26,13 @@ async function addToCart(productId) {
         }
       } catch (error) {
         console.error("Error al crear el carrito:", error);
-        return null;
+        return false;
       }
     }
   }
 
   if (!cart) {
-    return null;
+    return false;
   }
 
   try {
@@ -49,22 +43,17 @@ async function addToCart(productId) {
         headers: {
           "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     if (!response.ok) {
       throw new Error(`Error al agregar el producto: ${response.status}`);
     }
 
-    // Mostrar el sidebar del carrito
-    if (window.showCartSidebar) {
-      await window.showCartSidebar();
-    }
-
     return true;
   } catch (error) {
     console.error("Error al agregar producto al carrito:", error);
-    return null;
+    return false;
   }
 }
 
@@ -86,9 +75,37 @@ document.addEventListener("DOMContentLoaded", () => {
     addToCartBtn.disabled = true;
     addToCartBtn.textContent = "Agregando...";
 
-    await addToCart(productId);
+    try {
+      const success = await addToCart(productId);
 
-    addToCartBtn.disabled = false;
-    addToCartBtn.textContent = originalText;
+      if (success) {
+        // Esperar un poco para asegurar que el carrito se actualizó en el servidor
+        await new Promise((resolve) => setTimeout(resolve, 300));
+
+        // Mostrar el sidebar del carrito - esperar hasta que esté disponible
+        let attempts = 0;
+        const maxAttempts = 40; // Aumentar intentos a 40 (2 segundos)
+        while (!window.showCartSidebar && attempts < maxAttempts) {
+          await new Promise((resolve) => setTimeout(resolve, 50));
+          attempts++;
+        }
+
+        if (window.showCartSidebar) {
+          // Forzar mostrar el sidebar después de agregar un producto
+          // La función showCartSidebar ahora maneja los reintentos internamente
+          await window.showCartSidebar(true);
+        } else {
+          console.error(
+            "showCartSidebar no está disponible después de esperar",
+          );
+        }
+      }
+    } catch (error) {
+      console.error("Error al agregar producto:", error);
+    } finally {
+      // Asegurarse de que el botón siempre se rehabilite
+      addToCartBtn.disabled = false;
+      addToCartBtn.textContent = originalText;
+    }
   });
 });

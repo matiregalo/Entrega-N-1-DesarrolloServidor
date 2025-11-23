@@ -126,12 +126,10 @@ cartsRouter.put("/:cartId/products/:productId", async (req, res) => {
       { new: true, runValidators: true },
     ).populate("products.product");
 
-    res
-      .status(200)
-      .json({
-        message: "Cantidad del producto actualizada",
-        payload: updatedCart,
-      });
+    res.status(200).json({
+      message: "Cantidad del producto actualizada",
+      payload: updatedCart,
+    });
   } catch (error) {
     res
       .status(500)

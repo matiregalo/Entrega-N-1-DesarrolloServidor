@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     viewCartBtn.addEventListener("click", async (e) => {
       e.preventDefault();
       e.stopPropagation();
-      
+
       // Esperar a que el script del sidebar esté disponible
       if (window.showCartSidebar) {
         await window.showCartSidebar();

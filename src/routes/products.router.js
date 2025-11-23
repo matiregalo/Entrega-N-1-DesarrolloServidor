@@ -15,7 +15,7 @@ productsRouter.post("/", async (req, res) => {
       price: Number(price),
       stock: Number(stock),
       category,
-      thumbnails: ["/img/" + req.file.filename],
+      thumbnails: ["/img/" + thumbnails],
     };
     const product = new Product(newProduct);
     await product.save();

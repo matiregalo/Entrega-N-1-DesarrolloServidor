@@ -1,0 +1,51 @@
+<div class="cart-page">
+  <div class="cart-container">
+    {{#if cart.products.length}}
+      <div class="products-section">
+        <h2>Productos en el carrito</h2>
+        <div class="cart-items">
+          {{#each cart.products}}
+            <div class="cart-item" data-product-id="{{this.product._id}}">
+              <img
+                src="{{this.product.thumbnails.[0]}}"
+                alt="{{this.product.title}}"
+                class="cart-item-image"
+              />
+              <div class="cart-item-details">
+                <h4 class="product-name">
+                  <a
+                    href="/products/{{this.product._id}}"
+                  >{{this.product.title}}</a>
+                </h4>
+                <p class="unit-price">Precio unitario: ${{this.product.price}}</p>
+                <p class="quantity">Cantidad: {{this.quantity}}</p>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+
+      <div class="cart-sidebar">
+        <div class="cart-sidebar-content">
+          <h3>Resumen</h3>
+          <div class="cart-summary">
+            <div class="summary-row">
+              <span>Total de productos:</span>
+              <span>{{cart.products.length}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{else}}
+      <div class="empty-cart">
+        <div class="empty-cart-icon">🛒</div>
+        <h2 class="empty-cart-title">Tu carrito está vacío</h2>
+        <p class="empty-cart-message">
+          No hay productos en tu carrito. ¡Agrega algunos productos para
+          comenzar!
+        </p>
+        <a href="/" class="browse-products-btn">Explorar productos</a>
+      </div>
+    {{/if}}
+  </div>
+</div>
